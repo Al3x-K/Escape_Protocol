@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
-    public float movementSpeed = 5f; // Speed of the character.
+    public float movementSpeed = 30f; // Speed of the character.
     public float rotationSpeed = 720f; // Rotation speed in degrees per second.
     public float mouseSensitivity = 2f; // Sensitivity of mouse look.
 
