@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     public float movementSpeed = 30f; // Speed of the character.
     public float rotationSpeed = 720f; // Rotation speed in degrees per second.
     public float mouseSensitivity = 2f; // Sensitivity of mouse look.
+    [SerializeField] public Vector3 cameraPosition;
 
     private NavMeshAgent agent;
     private Camera mainCamera;
@@ -65,9 +66,10 @@ public class PlayerController : MonoBehaviour
         Quaternion targetRotation = Quaternion.Euler(0, yaw, 0);
         transform.rotation = targetRotation;
 
-        // Align the camera with the character.
-        Vector3 cameraPosition = transform.position + Vector3.up * 1.5f; // Adjust camera height as needed.
-        mainCamera.transform.position = cameraPosition;
-        mainCamera.transform.rotation = transform.rotation;
+        // Rotate the camera based on yaw.
+        mainCamera.transform.position = transform.position + cameraPosition;
+        mainCamera.transform.rotation = targetRotation;
+
+
     }
 }
