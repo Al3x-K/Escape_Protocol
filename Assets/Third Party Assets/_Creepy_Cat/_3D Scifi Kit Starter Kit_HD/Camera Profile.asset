@@ -60,13 +60,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e6292b2c06870d4495f009f912b9600, type: 3}
+  m_Script: {fileID: 11500000, guid: bfaa4ad0a900da94ab84fe2f1826c605, type: 3}
   m_Name: Camera Profile
   m_EditorClassIdentifier: 
-  settings:
-  - {fileID: 3797971725953170626}
-  - {fileID: -1699192904543745290}
-  - {fileID: 2753079138188790573}
+  TurnX: 0
+  TurnY: 0
+  TurnZ: 0
+  MoveX: 0
+  MoveY: 0
+  MoveZ: 0
+  World: 0
 --- !u!114 &2753079138188790573
 MonoBehaviour:
   m_ObjectHideFlags: 3
