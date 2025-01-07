@@ -3,21 +3,23 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
-    public float movementSpeed = 30f; // Speed of the character.
-    public float rotationSpeed = 720f; // Rotation speed in degrees per second.
-    public float mouseSensitivity = 2f; // Sensitivity of mouse look.
+    public float movementSpeed = 30f; 
+    public float rotationSpeed = 720f; 
+    public float mouseSensitivity = 2f; 
     [SerializeField] public Vector3 cameraPosition;
 
     private NavMeshAgent agent;
     private Camera mainCamera;
     private float yaw = 0f;
+    private float pitch = 0f; 
+    public float pitchLimit = 45f; 
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         mainCamera = Camera.main;
-        agent.updateRotation = false; // Prevent NavMeshAgent from controlling rotation.
-        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor for mouse look.
+        agent.updateRotation = false; 
+        Cursor.lockState = CursorLockMode.Locked; 
         Cursor.visible = false;
     }
 
@@ -29,9 +31,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement()
     {
-        // Get input for movement.
-        float horizontal = Input.GetAxis("Horizontal"); // A/D or Left/Right.
-        float vertical = Input.GetAxis("Vertical");   // W/S or Up/Down.
+        float horizontal = Input.GetAxis("Horizontal"); 
+        float vertical = Input.GetAxis("Vertical");  
 
         // Calculate movement direction relative to the camera.
         Vector3 forward = mainCamera.transform.forward;
@@ -58,18 +59,21 @@ public class PlayerController : MonoBehaviour
     {
         // Get mouse movement.
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-        // Adjust yaw based on mouse input.
+        // Adjust yaw and pitch based on mouse input.
         yaw += mouseX;
+        pitch -= mouseY;
 
-        // Rotate the character based on yaw.
+        // Clamp the pitch to prevent over-rotation.
+        pitch = Mathf.Clamp(pitch, -pitchLimit, pitchLimit);
+
+        // Rotate the character left and right based on yaw.
         Quaternion targetRotation = Quaternion.Euler(0, yaw, 0);
         transform.rotation = targetRotation;
 
-        // Rotate the camera based on yaw.
+        // Rotate the camera up and down based on pitch.
         mainCamera.transform.position = transform.position + cameraPosition;
-        mainCamera.transform.rotation = targetRotation;
-
-
+        mainCamera.transform.rotation = Quaternion.Euler(pitch, yaw, 0);
     }
 }
