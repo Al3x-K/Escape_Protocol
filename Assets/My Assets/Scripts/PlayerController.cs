@@ -76,4 +76,6 @@ public class PlayerController : MonoBehaviour
         mainCamera.transform.position = transform.position + cameraPosition;
         mainCamera.transform.rotation = Quaternion.Euler(pitch, yaw, 0);
     }
+
+   
 }
