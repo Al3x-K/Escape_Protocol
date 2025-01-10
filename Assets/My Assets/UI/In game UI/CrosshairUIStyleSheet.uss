@@ -1,0 +1,23 @@
+/* Crosshair default style */
+.crosshair {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+/* Crosshair style when targeting interactable objects */
+.interactable {
+    background-color: green;
+}
+
+.interact-prompt {
+    color: white;
+    font-size: 14px;
+    unity-text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 100%);
+    display: none;
+}
