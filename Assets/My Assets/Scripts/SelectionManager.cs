@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class CrosshairController : MonoBehaviour
+public class SelectionManager : MonoBehaviour
 {
     private VisualElement crosshair; // Crosshair UI element
     private Label interactPrompt;    // Interaction prompt (e.g., "Press E")
@@ -12,12 +12,13 @@ public class CrosshairController : MonoBehaviour
     private Transform currentSelection;
     private string selectableTag = "Selectable";
 
+    private Keycard highlightedKeycard;
+
     private void Start()
     {
         // Cache the main camera
         mainCamera = Camera.main;
 
-        // Set up UI Toolkit references
         var uiDocument = GetComponent<UIDocument>();
         var root = uiDocument.rootVisualElement;
 
@@ -35,7 +36,6 @@ public class CrosshairController : MonoBehaviour
 
     private void UpdateCrosshairState()
     {
-        // If there's a previous selection, reset its crosshair state
         if (currentSelection != null)
         {
             ResetCrosshairState();
@@ -52,49 +52,66 @@ public class CrosshairController : MonoBehaviour
             {
                 currentSelection = selection;
 
+                var keycard = selection.GetComponent<Keycard>();
+                if (keycard != null)
+                {
+                    HighlightKeycard(keycard);
+                }
+
                 // Show the interaction prompt
                 interactPrompt.text = "Press E to interact";
                 interactPrompt.style.display = DisplayStyle.Flex;
 
-                // Optional: Debug log
-                Debug.Log($"Aiming at {selection.name}");
-
-                // Handle interaction (e.g., picking up items) when pressing "E"
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     HandleInteraction(selection);
                 }
 
-                return; // Exit early to avoid resetting unnecessarily
+                return; 
             }
         }
         
-        // If no valid selection is found, hide the prompt
         interactPrompt.style.display = DisplayStyle.None;
     }
 
     private void ResetCrosshairState()
     {
+        // Reset current selection
         currentSelection = null;
+
+        // Remove highlight from the previously highlighted keycard
+        if (highlightedKeycard != null)
+        {
+            highlightedKeycard.Highlight(false);
+            highlightedKeycard = null;
+        }
+
         interactPrompt.style.display = DisplayStyle.None;
+    }
+
+    private void HighlightKeycard(Keycard keycard)
+    {
+        if (highlightedKeycard != null && highlightedKeycard != keycard)
+        {
+            highlightedKeycard.Highlight(false);
+        }
+
+        keycard.Highlight(true);
+        highlightedKeycard = keycard;
     }
 
     private void HandleInteraction(Transform selection)
     {
-        // Attempt to get the Keycard component
         var keycard = selection.GetComponent<Keycard>();
         if (keycard != null)
         {
             Debug.Log($"Attempting to pick up keycard: {keycard.itemData.itemName}");
 
-            // Attempt to get the PlayerInventory component
             PlayerInventory playerInventory = GetComponent<PlayerInventory>();
             if (playerInventory != null)
             {
-                // Add the item to the inventory
                 playerInventory.AddItem(keycard.itemData);
 
-                // Destroy the keycard object
                 Destroy(keycard.gameObject);
 
                 Debug.Log($"Picked up keycard: {keycard.itemData.itemName}");
@@ -103,10 +120,30 @@ public class CrosshairController : MonoBehaviour
             {
                 Debug.LogWarning("PlayerInventory not found on the player.");
             }
+
+            return; 
         }
-        else
+
+        var lockedDoor = selection.GetComponent<LockedDoor>();
+        if (lockedDoor != null)
         {
-            Debug.LogWarning("Keycard component not found on the targeted object.");
+            Debug.Log("Attempting to unlock door.");
+
+            PlayerInventory playerInventory = GetComponent<PlayerInventory>();
+            if (playerInventory != null && playerInventory.HasItem(lockedDoor.requiredKeyID))
+            {
+                Debug.Log("Door unlocked!");
+                lockedDoor.UnlockDoor();
+            }
+            else
+            {
+                Debug.Log("Door is locked. Missing required keycard.");
+            }
+
+            return; 
         }
+
+        Debug.LogWarning("The selected object does not have a valid interactable component.");
     }
+
 }
