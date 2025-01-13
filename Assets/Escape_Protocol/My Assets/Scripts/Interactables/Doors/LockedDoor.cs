@@ -9,8 +9,12 @@ public class LockedDoor : MonoBehaviour
     public ItemData requiredKeyItem; 
     public float slideDistance; 
     public float slideSpeed; 
-    public AudioClip openDoorSound; 
-    public AudioMixerGroupName audioGroup = AudioMixerGroupName.SFX; 
+    
+    public AudioClip openDoorSound;
+    public AudioMixerGroupName audioGroup = AudioMixerGroupName.SFX;
+    public AudioClip denySound;
+    public AudioClip grantAccessSound;
+    public AudioMixerGroupName audioGroup1 = AudioMixerGroupName.Voiceover;
 
     private Vector3 originalPosition; 
     private bool isOpen = false; 
@@ -39,6 +43,16 @@ public class LockedDoor : MonoBehaviour
         {
             Debug.LogWarning("Open door sound is not assigned.");
         }
+    }
+
+    public void PlayDenySound()
+    {
+        AudioManager.Instance.PlaySound(denySound, audioGroup1, this.transform.position);
+    }
+
+    public void PlayGrantAccessSound()
+    {
+        AudioManager.Instance.PlaySound(grantAccessSound, audioGroup1, this.transform.position);
     }
 
     private IEnumerator OpenDoor()

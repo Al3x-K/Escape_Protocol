@@ -134,11 +134,13 @@ public class SelectionManager : MonoBehaviour
             if (playerInventory != null && playerInventory.Contains(lockedDoor.requiredKeyItem))
             {
                 Debug.Log("Door unlocked!");
+                lockedDoor.PlayGrantAccessSound();
                 lockedDoor.UnlockDoor();
             }
             else
             {
                 Debug.Log("Door is locked. Missing required keycard.");
+                lockedDoor.PlayDenySound();
             }
 
             return;
