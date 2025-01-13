@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LockedDoor : MonoBehaviour
 {
-    public string requiredKeyID;
+    public ItemData requiredKeyItem;
 
     private bool isUnlocked = false;
     private Vector3 originalPosition; 
