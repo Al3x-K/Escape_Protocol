@@ -18,6 +18,8 @@ public class SelectionManager : MonoBehaviour
     private Keycard highlightedKeycard;
     private TerminalInteraction highlightedItem;
 
+    private Transform heldCube;
+
 
     private void Start()
     {
@@ -37,8 +39,62 @@ public class SelectionManager : MonoBehaviour
     private void Update()
     {
         UpdateCrosshairState();
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (heldCube == null)
+            {
+                TryPickupCube();
+            }
+            else
+            {
+                TryPlaceCube();
+            }
+        }
+    }
+    private void TryPickupCube()
+    {
+        Ray ray = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, interactDistance))
+        {
+            var cube = hitInfo.transform.GetComponent<PuzzleCube>();
+            if (cube != null)
+            {
+                heldCube = cube.transform;
+                heldCube.SetParent(mainCamera.transform); // Attach to camera
+                heldCube.localPosition = new Vector3(0, -0.5f, 1f); // Position in front of the camera
+                heldCube.GetComponent<Rigidbody>().isKinematic = true; // Disable physics
+            }
+        }
     }
 
+    private void TryPlaceCube()
+    {
+        Ray ray = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, interactDistance))
+        {
+            var pedestal = hitInfo.transform.GetComponent<Pedestal>();
+            if (pedestal != null)
+            {
+                heldCube.SetParent(null); // Detach from the camera
+                heldCube.position = pedestal.transform.position; // Snap to pedestal
+                heldCube.GetComponent<Rigidbody>().isKinematic = false; // Re-enable physics
+
+                var cubeScript = heldCube.GetComponent<PuzzleCube>();
+                if (cubeScript != null)
+                {
+                    cubeScript.CheckPlacement(pedestal.transform);
+                }
+
+                heldCube = null;
+                return;
+            }
+        }
+
+        // If not placing on a pedestal, drop the cube at the current position
+        heldCube.SetParent(null);
+        heldCube.GetComponent<Rigidbody>().isKinematic = false; // Re-enable physics
+        heldCube = null;
+    }
     private void UpdateCrosshairState()
     {
         if (currentSelection != null)
@@ -76,7 +132,7 @@ public class SelectionManager : MonoBehaviour
             }
         }
 
-        interactPrompt.style.display = DisplayStyle.None;
+        interactPrompt.style.display = DisplayStyle.None; 
     }
 
     private void ResetCrosshairState()
@@ -170,6 +226,6 @@ public class SelectionManager : MonoBehaviour
         }
 
 
-        Debug.LogWarning("The selected object does not have a valid interactable component.");
+        //Debug.LogWarning("The selected object does not have a valid interactable component.");
     }
 }

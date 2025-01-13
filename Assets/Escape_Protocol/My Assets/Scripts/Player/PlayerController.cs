@@ -1,26 +1,44 @@
 using UnityEngine;
 using UnityEngine.AI;
+using GD.Audio;
+using GD.Types;
 
 public class PlayerController : MonoBehaviour
 {
-    public float movementSpeed = 30f; 
-    public float rotationSpeed = 720f; 
-    public float mouseSensitivity = 2f; 
+    public float movementSpeed = 30f;
+    public float rotationSpeed = 720f;
+    public float mouseSensitivity = 2f;
     [SerializeField] public Vector3 cameraPosition;
 
     private NavMeshAgent agent;
     private Camera mainCamera;
     private float yaw = 0f;
-    private float pitch = 0f; 
-    public float pitchLimit = 45f; 
+    private float pitch = 0f;
+    public float pitchLimit = 45f;
+
+    public AudioClip footsteps; // Footsteps sound
+    public AudioMixerGroupName audioGroup = AudioMixerGroupName.SFX;
+
+    private AudioSource audioSource;
+    private bool isMoving = false;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         mainCamera = Camera.main;
-        agent.updateRotation = false; 
-        Cursor.lockState = CursorLockMode.Locked; 
+        agent.updateRotation = false;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        // Initialize AudioSource for footsteps
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        audioSource.clip = footsteps;
+        audioSource.loop = true;
+        audioSource.outputAudioMixerGroup = AudioManager.Instance.GetAudioMixerGroup(audioGroup);
     }
 
     void Update()
@@ -31,10 +49,10 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement()
     {
-        float horizontal = Input.GetAxis("Horizontal"); 
-        float vertical = Input.GetAxis("Vertical");  
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
-        // Calculate movement direction relative to the camera.
+        // Calculate movement direction relative to the camera
         Vector3 forward = mainCamera.transform.forward;
         Vector3 right = mainCamera.transform.right;
         forward.y = 0;
@@ -46,36 +64,65 @@ public class PlayerController : MonoBehaviour
 
         if (moveDirection.magnitude > 0.1f)
         {
-            // Move the character manually.
+            // Move the character manually
             agent.Move(moveDirection * movementSpeed * Time.deltaTime);
 
-            // Rotate character smoothly towards movement direction if needed.
+            // Rotate character smoothly towards movement direction
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+            if (!isMoving)
+            {
+                StartFootsteps();
+            }
+        }
+        else
+        {
+            if (isMoving)
+            {
+                StopFootsteps();
+            }
         }
     }
 
     private void HandleMouseLook()
     {
-        // Get mouse movement.
+        // Get mouse movement
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-        // Adjust yaw and pitch based on mouse input.
+        // Adjust yaw and pitch based on mouse input
         yaw += mouseX;
         pitch -= mouseY;
 
-        // Clamp the pitch to prevent over-rotation.
+        // Clamp the pitch to prevent over-rotation
         pitch = Mathf.Clamp(pitch, -pitchLimit, pitchLimit);
 
-        // Rotate the character left and right based on yaw.
+        // Rotate the character left and right based on yaw
         Quaternion targetRotation = Quaternion.Euler(0, yaw, 0);
         transform.rotation = targetRotation;
 
-        // Rotate the camera up and down based on pitch.
+        // Rotate the camera up and down based on pitch
         mainCamera.transform.position = transform.position + cameraPosition;
         mainCamera.transform.rotation = Quaternion.Euler(pitch, yaw, 0);
     }
 
-   
+    private void StartFootsteps()
+    {
+        if (audioSource != null && !audioSource.isPlaying)
+        {
+            audioSource.Play();
+            isMoving = true;
+        }
+    }
+
+    private void StopFootsteps()
+    {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+            isMoving = false;
+        }
+    }
 }
+
