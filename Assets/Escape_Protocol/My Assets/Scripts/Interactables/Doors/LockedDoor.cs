@@ -1,15 +1,19 @@
 using UnityEngine;
 using System.Collections;
-using GD.Items;
+using GD.Audio; 
+using GD.Types;
+using GD.Items; 
 
 public class LockedDoor : MonoBehaviour
 {
-    public ItemData requiredKeyItem;
-
-    private bool isUnlocked = false;
-    private Vector3 originalPosition; 
+    public ItemData requiredKeyItem; 
     public float slideDistance; 
-    public float slideSpeed;
+    public float slideSpeed; 
+    public AudioClip openDoorSound; 
+    public AudioMixerGroupName audioGroup = AudioMixerGroupName.SFX; 
+
+    private Vector3 originalPosition; 
+    private bool isOpen = false; 
 
     private void Start()
     {
@@ -18,15 +22,30 @@ public class LockedDoor : MonoBehaviour
 
     public void UnlockDoor()
     {
-        if (isUnlocked) return; 
-        isUnlocked = true;
-        StartCoroutine(SlideDoor());
+        if (isOpen) return;
+
+        Debug.Log("Door is unlocked!");
+        PlayOpenSound();
+        StartCoroutine(OpenDoor());
     }
 
-    private IEnumerator SlideDoor()
+    private void PlayOpenSound()
     {
-        Vector3 targetPosition = originalPosition - new Vector3(0, slideDistance, 0);
+        if (openDoorSound != null)
+        {
+            AudioManager.Instance.PlaySound(openDoorSound, audioGroup, this.transform.position);
+        }
+        else
+        {
+            Debug.LogWarning("Open door sound is not assigned.");
+        }
+    }
 
+    private IEnumerator OpenDoor()
+    {
+        isOpen = true;
+
+        Vector3 targetPosition = originalPosition - new Vector3(0, slideDistance, 0);
         while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, slideSpeed * Time.deltaTime);
@@ -34,13 +53,13 @@ public class LockedDoor : MonoBehaviour
         }
 
         yield return new WaitForSeconds(2f);
-
+        PlayOpenSound();
         while (Vector3.Distance(transform.position, originalPosition) > 0.01f)
-        {
+        { 
             transform.position = Vector3.MoveTowards(transform.position, originalPosition, slideSpeed * Time.deltaTime);
             yield return null;
         }
 
-        isUnlocked = false; 
+        isOpen = false; 
     }
 }

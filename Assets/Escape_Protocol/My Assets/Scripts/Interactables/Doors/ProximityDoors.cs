@@ -8,7 +8,8 @@ public class ProximityDoor : MonoBehaviour
     public float slideSpeed;  
 
     private Vector3 originalPosition; 
-    private bool isOpen = false;      
+    private bool isOpen = false;
+
 
     private void Start()
     {
@@ -21,6 +22,7 @@ public class ProximityDoor : MonoBehaviour
             Debug.LogError("Door reference not assigned to ProximityDoor.");
         }
     }
+
 
     private void OnTriggerEnter(Collider other)
     {

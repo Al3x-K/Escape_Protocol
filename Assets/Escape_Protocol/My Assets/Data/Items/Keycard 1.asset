@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be7f4dccbb8e27c4ab24180fbcf003a9, type: 3}
   m_Name: Keycard 1
   m_EditorClassIdentifier: 
-  itemName: Keycard 1
+  name: 'Key Card '
   description: Unlocks locked doors
-  icon: {fileID: 21300000, guid: c40ec3e33ff1d59479fa74b4b1619297, type: 3}
-  keyID: Keycard1
+  itemCategory: 4
+  itemType: 19
+  uiIcon: {fileID: 21300000, guid: c40ec3e33ff1d59479fa74b4b1619297, type: 3}
+  audioClip: {fileID: 0}
+  audioPosition: {x: 0, y: 0, z: 0}
