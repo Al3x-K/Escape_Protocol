@@ -108,7 +108,7 @@ public class SelectionManager : MonoBehaviour
         var keycard = selection.GetComponent<Keycard>();
         if (keycard != null)
         {
-            Debug.Log($"Attempting to pick up keycard: {keycard.itemData.itemName}");
+            Debug.Log($"Attempting to pick up keycard: {keycard.itemData.ItemType}");
 
             if (playerInventory != null)
             {
@@ -116,7 +116,7 @@ public class SelectionManager : MonoBehaviour
 
                 Destroy(keycard.gameObject); // Remove the keycard from the scene
 
-                Debug.Log($"Picked up keycard: {keycard.itemData.itemName}");
+                Debug.Log($"Picked up keycard: {keycard.itemData.ItemType}");
             }
             else
             {

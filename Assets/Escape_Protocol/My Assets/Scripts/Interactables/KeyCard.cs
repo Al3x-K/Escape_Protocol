@@ -1,3 +1,4 @@
+using GD.Items;
 using UnityEngine;
 
 public class Keycard : MonoBehaviour

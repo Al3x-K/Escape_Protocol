@@ -113,8 +113,12 @@ namespace GD.Items
                 return false;
             }
 
+            // Ensure the key exists in the contents dictionary
             bool result = contents.ContainsKey(item);
-            Debug.Log($"Checking inventory for {item.itemName}: {(result ? "Found" : "Not Found")}");
+
+            // Log the result
+            Debug.Log($"Checking inventory for item: {item.ItemType} in category {item.ItemCategory}: {(result ? "Found" : "Not Found")}");
+
             return result;
         }
 
