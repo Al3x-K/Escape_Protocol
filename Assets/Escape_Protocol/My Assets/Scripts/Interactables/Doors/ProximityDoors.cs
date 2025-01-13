@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using GD.Audio;
+using GD.Types;
 
 public class ProximityDoor : MonoBehaviour
 {
@@ -9,6 +11,9 @@ public class ProximityDoor : MonoBehaviour
 
     private Vector3 originalPosition; 
     private bool isOpen = false;
+
+    public AudioClip openDoorSound;
+    public AudioMixerGroupName audioGroup = AudioMixerGroupName.SFX;
 
 
     private void Start()
@@ -43,26 +48,40 @@ public class ProximityDoor : MonoBehaviour
     private IEnumerator OpenDoor()
     {
         isOpen = true;
-
+        PlayOpenSound();
         Vector3 targetPosition = originalPosition - new Vector3(0, slideDistance, 0);
         while (Vector3.Distance(door.position, targetPosition) > 0.01f)
         {
             door.position = Vector3.MoveTowards(door.position, targetPosition, slideSpeed * Time.deltaTime);
             yield return null;
         }
+     
     }
 
     private IEnumerator CloseDoor()
     {
         yield return new WaitForSeconds(2f);
-
+        PlayOpenSound();
         while (Vector3.Distance(door.position, originalPosition) > 0.01f)
         {
             door.position = Vector3.MoveTowards(door.position, originalPosition, slideSpeed * Time.deltaTime);
             yield return null;
         }
-
+        
         isOpen = false;
+        
+    }
+
+    private void PlayOpenSound()
+    {
+        if (openDoorSound != null)
+        {
+            AudioManager.Instance.PlaySound(openDoorSound, audioGroup, this.transform.position);
+        }
+        else
+        {
+            Debug.LogWarning("Open door sound is not assigned.");
+        }
     }
 }
 

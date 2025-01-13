@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,6 +20,10 @@ namespace GD.Events
 
         [SerializeField]
         private UnityEvent Response;
+
+        public GameEventListener(Action onPuzzleCompleted)
+        {
+        }
 
         private void Awake()
         {
