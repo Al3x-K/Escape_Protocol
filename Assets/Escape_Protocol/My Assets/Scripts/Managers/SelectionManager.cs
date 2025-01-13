@@ -16,6 +16,8 @@ public class SelectionManager : MonoBehaviour
     private string selectableTag = "Selectable";
 
     private Keycard highlightedKeycard;
+    private TerminalInteraction highlightedItem;
+
 
     private void Start()
     {
@@ -103,6 +105,16 @@ public class SelectionManager : MonoBehaviour
         highlightedKeycard = keycard;
     }
 
+    private void HighLightTerminal(TerminalInteraction terminal)
+    {
+        if (highlightedItem != null && highlightedItem != terminal)
+        {
+            highlightedItem.Highlight(false);
+        }
+        terminal.Highlight(true);
+        highlightedItem = terminal;
+    }
+
     private void HandleInteraction(Transform selection)
     {
         var keycard = selection.GetComponent<Keycard>();
@@ -145,6 +157,18 @@ public class SelectionManager : MonoBehaviour
 
             return;
         }
+
+        
+        var terminal = selection.GetComponent<TerminalInteraction>();
+        PuzzleDoor puzzleDoor = null;
+        if (terminal != null)
+        {
+            Debug.Log("Interacting with terminal.");
+            terminal.Interact();
+            puzzleDoor.ToggleActiveState();
+            return;
+        }
+
 
         Debug.LogWarning("The selected object does not have a valid interactable component.");
     }

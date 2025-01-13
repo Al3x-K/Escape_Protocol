@@ -61,7 +61,6 @@ public class ProximityDoor : MonoBehaviour
     private IEnumerator CloseDoor()
     {
         yield return new WaitForSeconds(2f);
-        PlayOpenSound();
         while (Vector3.Distance(door.position, originalPosition) > 0.01f)
         {
             door.position = Vector3.MoveTowards(door.position, originalPosition, slideSpeed * Time.deltaTime);
