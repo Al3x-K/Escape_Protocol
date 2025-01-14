@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using GD.Audio;
 
 public class MainMenuScript : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class MainMenuScript : MonoBehaviour
     private Button playButton;
     private Button settingsButton;
     private Button quitButton;
+
+    public AudioClip buttonClickSound;
 
     private void OnEnable()
     {
@@ -54,6 +57,7 @@ public class MainMenuScript : MonoBehaviour
     private void OnPlayButtonClicked()
     {
         gameManager.StartGame();
+        PlaySound(OnPlayButtonClicked);
     }
 
     private void OnSettingsButtonClicked()
@@ -64,5 +68,10 @@ public class MainMenuScript : MonoBehaviour
     private void OnQuitButtonClicked()
     {
         gameManager.QuitGame();
+    }
+
+    private void PlaySound()
+    {
+       
     }
 }

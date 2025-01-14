@@ -9,15 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b1031bb54b0bcb4f9d7e15398fe531a, type: 3}
-  m_Name: Keys
+  m_Script: {fileID: 11500000, guid: a697831dbbbd6274bbb2eb28d4901635, type: 3}
+  m_Name: Inventory - Duckies
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: a31cb6fab30a8bf44a24343d23df53cd, type: 2}
-    - {fileID: 11400000, guid: 0423b93a016431946be9f77eb423ce7f, type: 2}
+    - {fileID: 11400000, guid: 3013a523f637f4c4aa3c1585c0d8da92, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -25,44 +24,26 @@ MonoBehaviour:
     SerializationNodes:
     - Name: contents
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[GD.Types.ItemCategoryType,
-        Assembly-CSharp],[GD.Items.Inventory, Assembly-CSharp]], mscorlib
+      Data: 0|System.Collections.Generic.Dictionary`2[[GD.Items.ItemData, Assembly-CSharp],[System.Int32,
+        mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 1|System.Collections.Generic.SByteEnumEqualityComparer`1[[GD.Types.ItemCategoryType,
+      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[GD.Items.ItemData,
         Assembly-CSharp]], mscorlib
     - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 1
     - Name: 
       Entry: 7
       Data: 
     - Name: $k
-      Entry: 3
-      Data: 4
-    - Name: $v
       Entry: 10
       Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 6
     - Name: $v
-      Entry: 10
+      Entry: 3
       Data: 1
     - Name: 
       Entry: 8
@@ -73,5 +54,5 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  onCollectionChange: {fileID: 11400000, guid: 50dc7c25c4a939b4fa12fb3cf8c82fbe, type: 2}
-  onCollectionEmpty: {fileID: 11400000, guid: 47452dabc390c3340a48614cf2d5d848, type: 2}
+  onInventoryChange: {fileID: 11400000, guid: 1d5566abd8def9a4ba7f06f914f1b66b, type: 2}
+  onInventoryClear: {fileID: 11400000, guid: 5f4ee67b6a6dbd647bd52311cb875382, type: 2}

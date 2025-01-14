@@ -25,6 +25,7 @@ public class SelectionManager : MonoBehaviour
     private GameManager gameManager;
 
     public AudioClip cardpPickupSound;
+    public AudioClip duckPickupSound;
     public AudioMixerGroupName audioGroup = AudioMixerGroupName.Voiceover;
 
 
@@ -252,6 +253,23 @@ public class SelectionManager : MonoBehaviour
             terminal.Interact();
             puzzleDoor.ToggleActiveState();
             return;
+        }
+        
+        var rubberDuck = selection.GetComponent<RubberDuck>();
+        if (rubberDuck != null && !rubberDuck.isCollected)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (playerInventory != null)
+                {
+                    playerInventory.Add(rubberDuck.itemData, 1); // Add the keycard to the inventory
+                    PlaySound(duckPickupSound);
+
+                    Destroy(rubberDuck.gameObject); // Remove the keycard from the scene
+
+                    Debug.Log($"Picked up keycard: {rubberDuck.itemData.ItemType}");
+                }
+            }
         }
 
 

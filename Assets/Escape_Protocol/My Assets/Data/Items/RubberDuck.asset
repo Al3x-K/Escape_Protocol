@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be7f4dccbb8e27c4ab24180fbcf003a9, type: 3}
+  m_Name: RubberDuck
+  m_EditorClassIdentifier: 
+  name: RubberDuck
+  description: Arubber duck,some instances can vary in colours.
+  itemCategory: 4
+  itemType: 4
+  uiIcon: {fileID: 21300000, guid: 70d03f7a84f2fad44b177134941eb099, type: 3}
+  audioClip: {fileID: 8300000, guid: b7ede77871a34eb4a9b80baf7572837d, type: 3}
+  audioPosition: {x: 0, y: 0, z: 0}
