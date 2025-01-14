@@ -10,8 +10,6 @@ public class MainMenuScript : MonoBehaviour
     private Button settingsButton;
     private Button quitButton;
 
-    public AudioClip buttonClickSound;
-
     private void OnEnable()
     {
         // Re-register event listeners whenever the menu is enabled
@@ -57,7 +55,6 @@ public class MainMenuScript : MonoBehaviour
     private void OnPlayButtonClicked()
     {
         gameManager.StartGame();
-        PlaySound(OnPlayButtonClicked);
     }
 
     private void OnSettingsButtonClicked()
@@ -70,8 +67,5 @@ public class MainMenuScript : MonoBehaviour
         gameManager.QuitGame();
     }
 
-    private void PlaySound()
-    {
-       
-    }
+
 }

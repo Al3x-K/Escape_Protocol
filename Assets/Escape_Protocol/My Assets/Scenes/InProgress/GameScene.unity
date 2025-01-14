@@ -1204,6 +1204,7 @@ Transform:
   - {fileID: 322376266}
   - {fileID: 487874850}
   - {fileID: 1409539901}
+  - {fileID: 1202893642}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &44114260
@@ -22347,6 +22348,55 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &1202893641
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1202893642}
+  - component: {fileID: 1202893643}
+  m_Layer: 0
+  m_Name: MainMenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1202893642
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202893641}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -293.33417, y: 167.30345, z: -839.5323}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 42786733}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1202893643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202893641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4218d5f0fd57cf4fa5258267761dda1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuMusic: {fileID: 8300000, guid: 4445e2a7ab87349b58d1d84896d24e86, type: 3}
+  playGameMusic: {fileID: 8300000, guid: 4445e2a7ab87349b58d1d84896d24e86, type: 3}
+  menuClickSound: {fileID: 8300000, guid: f8ba8dd93e27681469d464f6dc67919e, type: 3}
+  backgroundGroup: 2
+  uiGroup: 4
 --- !u!1001 &1207605093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24859,7 +24909,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactDistance: 40
   playerInventory: {fileID: 11400000, guid: a31cb6fab30a8bf44a24343d23df53cd, type: 2}
-  duckies: {fileID: 0}
   cardpPickupSound: {fileID: 8300000, guid: 9cde895f1b2dca348a4215d23e7be8d7, type: 3}
   duckPickupSound: {fileID: 8300000, guid: b7ede77871a34eb4a9b80baf7572837d, type: 3}
   audioGroup: 5
@@ -25092,11 +25141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e89e1f29c5927c4bacde04c9cbc9a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInventory: {fileID: 11400000, guid: 0423b93a016431946be9f77eb423ce7f, type: 2}
-  duckItem: {fileID: 11400000, guid: 3013a523f637f4c4aa3c1585c0d8da92, type: 2}
   totalDucks: 10
   puzzleCompleteSound: {fileID: 8300000, guid: d2283f6d909e3b646adcda7939f957a9, type: 3}
-  audioGroup: 3
 --- !u!1001 &1409786978
 PrefabInstance:
   m_ObjectHideFlags: 0
