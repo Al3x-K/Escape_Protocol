@@ -1,0 +1,9 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Escape_Protocol/My%20Assets/UI/Menu/StyleSheets/LoseGameStyleSheet.uss?fileID=7433441132597879392&amp;guid=d789ce61140c6c44f827b8c886c5103d&amp;type=3#LoseGameStyleSheet" />
+    <engine:VisualElement name="Panel" style="background-image: url(&quot;project://database/Assets/Escape_Protocol/Third%20Party%20Assets/UI/atlas.png?fileID=21300002&amp;guid=56d84991286850f428b4e7df0cca7380&amp;type=3#window1&quot;); top: 216px; background-color: rgb(27, 47, 80); -unity-background-image-tint-color: rgb(0, 255, 236);">
+        <engine:Label text="YOU LOST" name="Header" class="header" style="background-color: rgba(0, 0, 0, 0); -unity-font-definition: url(&quot;project://database/Assets/Escape_Protocol/Third%20Party%20Assets/UI/Skin_Assets/font/zekton%20free.ttf?fileID=12800000&amp;guid=8297a2bf97dbbba468bd2518d003a876&amp;type=3#zekton free&quot;);" />
+        <engine:VisualElement name="Buttons" style="background-image: none;">
+            <engine:Button name="HomeButton" class="button" style="background-image: url(&quot;project://database/Assets/Escape_Protocol/Third%20Party%20Assets/UI/atlas.png?fileID=21300020&amp;guid=56d84991286850f428b4e7df0cca7380&amp;type=3#rocket&quot;);" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

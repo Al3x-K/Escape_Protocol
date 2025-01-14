@@ -27,9 +27,6 @@ public class PlayerController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         mainCamera = Camera.main;
         agent.updateRotation = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
         // Initialize AudioSource for footsteps
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)

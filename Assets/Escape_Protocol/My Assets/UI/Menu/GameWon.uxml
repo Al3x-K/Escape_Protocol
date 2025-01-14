@@ -1,0 +1,9 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Escape_Protocol/My%20Assets/UI/Menu/StyleSheets/GameWonStylesheet.uss?fileID=7433441132597879392&amp;guid=14c5aa04d6897c04195796e59b406a60&amp;type=3#GameWonStylesheet" />
+    <engine:VisualElement name="Panel" style="-unity-font-definition: url(&quot;project://database/Assets/Escape_Protocol/Third%20Party%20Assets/UI/Skin_Assets/font/zekton%20free.ttf?fileID=12800000&amp;guid=8297a2bf97dbbba468bd2518d003a876&amp;type=3#zekton free&quot;); background-image: url(&quot;project://database/Assets/Escape_Protocol/Third%20Party%20Assets/UI/atlas.png?fileID=21300002&amp;guid=56d84991286850f428b4e7df0cca7380&amp;type=3#window1&quot;); top: 215px; left: 480px; background-color: rgb(27, 47, 80); -unity-background-image-tint-color: rgb(0, 255, 236);">
+        <engine:Label text="YOU WON" name="Header" class="header" style="-unity-font-definition: url(&quot;project://database/Assets/Escape_Protocol/Third%20Party%20Assets/UI/Skin_Assets/font/zekton%20free.ttf?fileID=12800000&amp;guid=8297a2bf97dbbba468bd2518d003a876&amp;type=3#zekton free&quot;);" />
+        <engine:VisualElement name="Buttons">
+            <engine:Button name="HomeButton" class="button" style="background-image: url(&quot;project://database/Assets/Escape_Protocol/Third%20Party%20Assets/UI/atlas.png?fileID=21300020&amp;guid=56d84991286850f428b4e7df0cca7380&amp;type=3#rocket&quot;);" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

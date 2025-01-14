@@ -1,0 +1,11 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Escape_Protocol/My%20Assets/UI/Menu/StyleSheets/PauseMenu.uss?fileID=7433441132597879392&amp;guid=ba5b1c9837c93e24797a7c9c187ceae5&amp;type=3#PauseMenu" />
+    <engine:VisualElement name="Panel" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Escape_Protocol/Third%20Party%20Assets/UI/atlas.png?fileID=21300002&amp;guid=56d84991286850f428b4e7df0cca7380&amp;type=3#window1&quot;); -unity-background-image-tint-color: rgb(0, 255, 236); background-color: rgb(27, 47, 80);">
+        <engine:Label text="PAUSE" name="Header" class="header" style="-unity-font-definition: url(&quot;project://database/Assets/Escape_Protocol/Third%20Party%20Assets/UI/Skin_Assets/font/zekton%20free.ttf?fileID=12800000&amp;guid=8297a2bf97dbbba468bd2518d003a876&amp;type=3#zekton free&quot;);" />
+        <engine:VisualElement name="Buttons">
+            <engine:Button text="Button" name="HomeButton" class="button" style="background-image: url(&quot;project://database/Assets/Escape_Protocol/Third%20Party%20Assets/UI/atlas.png?fileID=21300020&amp;guid=56d84991286850f428b4e7df0cca7380&amp;type=3#rocket&quot;);" />
+            <engine:Button text="Button" name="ResumeButton" class="button" style="background-image: url(&quot;project://database/Assets/Escape_Protocol/Third%20Party%20Assets/UI/atlas.png?fileID=21300018&amp;guid=56d84991286850f428b4e7df0cca7380&amp;type=3#pause&quot;);" />
+            <engine:Button text="Button" name="SettingsButton" class="button" style="background-image: url(&quot;project://database/Assets/Escape_Protocol/Third%20Party%20Assets/UI/atlas.png?fileID=21300022&amp;guid=56d84991286850f428b4e7df0cca7380&amp;type=3#bullets&quot;);" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

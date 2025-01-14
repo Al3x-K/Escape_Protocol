@@ -8,7 +8,7 @@ public class CubePuzzleManager : MonoBehaviour
     public List<PuzzleCube> cubes; // Assign all cubes in the Inspector
     public List<Pedestal> pedestals; // Assign all pedestals in the Inspector
     public AudioClip puzzleCompleteSound; // Sound for puzzle completion
-
+    public AudioClip puzzleCompleteSound2;
     public AudioMixerGroupName audioGroup = AudioMixerGroupName.SFX;
 
     private bool isPuzzleComplete = false;
@@ -58,6 +58,7 @@ public class CubePuzzleManager : MonoBehaviour
     {
         Debug.Log("Puzzle Completed!");
         PlaySound(puzzleCompleteSound);
+        PlaySound(puzzleCompleteSound2);
 
         // Trigger additional actions here (e.g., unlock a door, play effects, etc.)
     }

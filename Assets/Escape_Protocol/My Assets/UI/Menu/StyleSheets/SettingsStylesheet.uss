@@ -1,0 +1,60 @@
+.header {
+    font-size: 90px;
+    color: rgb(255, 255, 255);
+    -unity-font-definition: url('center');
+    left: -5%;
+    justify-content: center;
+    align-self: center;
+    top: 10%;
+}
+
+#MasterSlider Label {
+    color: rgb(255, 255, 255);
+    font-size: 50px;
+    width: 40%;
+    height: 40%;
+    left: 63%;
+    right: 0;
+    -unity-font-definition: url('center');
+    top: 10%;
+    background-color: rgba(0, 0, 0, 0);
+    opacity: 1;
+    -unity-text-outline-color: rgba(0, 0, 0, 0);
+}
+
+.button {
+    width: 6%;
+    height: 10%;
+    right: 0;
+    left: 82%;
+    top: 3%;
+}
+
+.button:hover {
+    -unity-background-image-tint-color: rgb(255, 166, 0);
+    background-image: url('center');
+    scale: 1.1 1.1;
+    background-color: rgb(255, 157, 0);
+}
+
+#MusicSlider Label {
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+    width: 40%;
+    height: 40%;
+    left: 65%;
+    right: 50%;
+    -unity-font-definition: url("project://database/Assets/Escape_Protocol/Third%20Party%20Assets/UI/Skin_Assets/font/zekton%20free.ttf?fileID=12800000&guid=8297a2bf97dbbba468bd2518d003a876&type=3#zekton free");
+    top: 10%;
+}
+
+#SFXSlider Label {
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    width: 40%;
+    height: 40%;
+    left: 65%;
+    right: 0;
+    -unity-font-definition: url('center');
+    top: 10%;
+}

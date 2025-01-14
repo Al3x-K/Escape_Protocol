@@ -1,7 +1,9 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using GD.Items;
-using System.Linq;
+using static GameManager;
+using GD.Types;
+using GD.Audio;
 
 public class SelectionManager : MonoBehaviour
 {
@@ -20,6 +22,11 @@ public class SelectionManager : MonoBehaviour
 
     private Transform heldCube;
 
+    private GameManager gameManager;
+
+    public AudioClip cardpPickupSound;
+    public AudioMixerGroupName audioGroup = AudioMixerGroupName.Voiceover;
+
 
     private void Start()
     {
@@ -29,11 +36,25 @@ public class SelectionManager : MonoBehaviour
         var uiDocument = GetComponent<UIDocument>();
         var root = uiDocument.rootVisualElement;
 
-        crosshair = root.Q<VisualElement>("Crosshair");
+        crosshair = root.Q<VisualElement>("crosshair");
         interactPrompt = root.Q<Label>("InteractPrompt");
 
-        // Hide the interaction prompt by default
-        interactPrompt.style.display = DisplayStyle.None;
+        if (interactPrompt == null)
+        {
+            Debug.LogError("InteractPrompt not found in the UI document.");
+        }
+
+
+        if (gameManager.CurrentGameState == GameManager.GameState.MainMenu)
+        {
+            crosshair.style.display = DisplayStyle.None;
+            interactPrompt.style.display = DisplayStyle.None;
+        }
+        else
+        {
+            crosshair.style.display = DisplayStyle.Flex;
+        }
+       
     }
 
     private void Update()
@@ -120,8 +141,15 @@ public class SelectionManager : MonoBehaviour
                 }
 
                 // Show the interaction prompt
-                interactPrompt.text = "Press E to interact";
-                interactPrompt.style.display = DisplayStyle.Flex;
+                if (interactPrompt != null)
+                {
+                    interactPrompt.text = "Press E to interact";
+                    interactPrompt.style.display = DisplayStyle.Flex;
+                }
+                else
+                {
+                    Debug.LogWarning("InteractPrompt is null and cannot be updated.");
+                }
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
@@ -181,6 +209,7 @@ public class SelectionManager : MonoBehaviour
             if (playerInventory != null)
             {
                 playerInventory.Add(keycard.itemData, 1); // Add the keycard to the inventory
+                PlaySound(cardpPickupSound);
 
                 Destroy(keycard.gameObject); // Remove the keycard from the scene
 
@@ -226,6 +255,27 @@ public class SelectionManager : MonoBehaviour
         }
 
 
-        //Debug.LogWarning("The selected object does not have a valid interactable component.");
+        Debug.LogWarning("The selected object does not have a valid interactable component.");
+    }
+
+    public void SetCrosshairVisibility(bool isVisible)
+    {
+        if (crosshair != null)
+        {
+            crosshair.style.display = isVisible ? DisplayStyle.Flex : DisplayStyle.None;
+            interactPrompt.style.display = isVisible ? DisplayStyle.Flex : DisplayStyle.None;
+        }
+    }
+
+    private void PlaySound(AudioClip sound)
+    {
+        if (sound != null)
+        {
+            AudioManager.Instance.PlaySound(sound, audioGroup, transform.position);
+        }
+        else
+        {
+            Debug.LogWarning("Puzzle complete sound is not assigned.");
+        }
     }
 }
